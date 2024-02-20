@@ -1,5 +1,5 @@
 # TTS-Rápido
-TTS de maneira rápida com interface/UI utilizando EDGE-TTS, Elevenlabs e em breve ConquiTTS <br> Este é um projeto que permite gerar áudio a partir de texto usando diferentes modelos de voz e velocidades de fala. Ele utiliza duas APIs diferentes para gerar o áudio: Edge-TTS (Gratuitamente) e Elevenlabs com api e Elevenlabs de maneira grauita (com limite). Além disso, oferece a opção de cortar o silêncio do áudio resultante. <br>
+TTS de maneira rápida com interface/UI utilizando EDGE-TTS, Elevenlabs e em breve ConquiTTS <br>  <br> Este é um projeto que permite gerar áudio a partir de texto usando diferentes modelos de voz e velocidades de fala. Ele utiliza duas APIs diferentes para gerar o áudio: Edge-TTS (Gratuitamente) e Elevenlabs com api e Elevenlabs de maneira grauita (com limite). Além disso, oferece a opção de cortar o silêncio do áudio resultante. <br>
 
 [![Discord](https://dcbadge.vercel.app/api/server/aihubbrasil)](https://discord.gg/aihubbrasil)
 [![Open In Colab](https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252)](https://colab.research.google.com/drive/1hpTDhlEEVZLtJ722d9U11DwNEadtxlu7?usp=sharing)
@@ -15,7 +15,7 @@ TTS de maneira rápida com interface/UI utilizando EDGE-TTS, Elevenlabs e em bre
 
 ## Como usar
 ### Online
-  No Colab, só dê play e seja feliz (Costuma funcionar mais a API FREE do elevenlabs, obviamente tem limite de requests.)
+  No Colab, só dê play e seja feliz (Costuma funcionar mais a API FREE do elevenlabs, obviamente tem limite de requests.) <br>
   No Huggingface, tem mais limitações, mas o edge-tts é tranquilo.
 
 ### Local
