@@ -5,7 +5,7 @@ TTS de maneira rápida com interface/UI utilizando EDGE-TTS, Elevenlabs e em bre
 [![Open In Colab](https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252)](https://colab.research.google.com/drive/1hpTDhlEEVZLtJ722d9U11DwNEadtxlu7?usp=sharing)
 [![Huggingface](https://img.shields.io/badge/🤗%20-Spaces-yellow.svg?style=for-the-badge)](https://huggingface.co/spaces/RafaG/TTS-Rapido)
 
-![tts-rapido](https://github.com/RafaelGodoyEbert/TTS-R-pido/assets/78083427/bec371c6-94d0-4f0e-ad6d-f009f9a5cfda)
+![image](https://github.com/RafaelGodoyEbert/TTS-R-pido/assets/78083427/d770f33e-ac46-40fc-8f94-16bd2bc2a3c5)
 
 ## Funcionalidades
 
