@@ -1,22 +1,20 @@
-# TTS-Rápido
-TTS de maneira rápida com interface/UI utilizando EDGE-TTS, Elevenlabs e em breve ConquiTTS <br>  <br> Este é um projeto que permite gerar áudio a partir de texto usando diferentes modelos de voz e velocidades de fala. Ele utiliza duas APIs diferentes para gerar o áudio: Edge-TTS (Gratuitamente) e Elevenlabs com api e Elevenlabs de maneira grauita (com limite). Além disso, oferece a opção de cortar o silêncio do áudio resultante. <br>
+# QuickTTS
+TTS de maneira rápida com interface/UI utilizando EDGE-TTS<br>  <br> Este é um projeto que permite gerar áudio a partir de texto usando diferentes modelos de voz e velocidades de fala. Ele utiliza Edge-TTS (Gratuitamente). Além disso, oferece a opção de cortar o silêncio do áudio resultante. <br>
 
 [![Discord](https://dcbadge.vercel.app/api/server/aihubbrasil)](https://discord.gg/aihubbrasil)
 [![Open In Colab](https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252)](https://colab.research.google.com/drive/1hpTDhlEEVZLtJ722d9U11DwNEadtxlu7?usp=sharing)
 [![Huggingface](https://img.shields.io/badge/🤗%20-Spaces-yellow.svg?style=for-the-badge)](https://huggingface.co/spaces/RafaG/TTS-Rapido)
 
-![image](https://github.com/RafaelGodoyEbert/TTS-R-pido/assets/78083427/d770f33e-ac46-40fc-8f94-16bd2bc2a3c5)
+![quicktts](https://github.com/user-attachments/assets/72af9d64-4857-4eef-9a1b-59558804696d)
 
 ## Funcionalidades
 
 - **Edge-TTS**: Utiliza a biblioteca Edge-TTS para gerar áudio a partir do texto inserido.
-- **Elevenlabs**: Oferece duas opções para gerar áudio usando a API Elevenlabs: uma versão gratuita e outra que requer uma chave de API.
-- **Conqui-TTS**: Em desenvolvimento.
 
 ## Como usar
 ### Online
-  No Colab, só dê play e seja feliz (Costuma funcionar mais a API FREE do elevenlabs, obviamente tem limite de requests.) <br>
-  No Huggingface, tem mais limitações, mas o edge-tts é tranquilo.
+  No Colab, só dê play e seja feliz<br>
+  No Huggingface o edge-tts também é tranquilo.
 
 ### Local
 1. Clone o repositório para sua máquina local.
@@ -40,7 +38,6 @@ Se você deseja contribuir para este projeto, sinta-se à vontade para abrir uma
 ## Agradecimentos
 
 - A [rany2](https://github.com/rany2) pelo Edge-TTS.
-- A [Elevenlabs](https://eleven-labs.com/) pela API de TTS.
 - Aos colaboradores deste projeto.
 
 ## Autor
