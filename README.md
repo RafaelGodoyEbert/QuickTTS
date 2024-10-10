@@ -18,7 +18,7 @@ TTS de maneira rápida com interface/UI utilizando EDGE-TTS<br>  <br> Este é um
 
 ### Local
 1. Clone o repositório para sua máquina local.
-   ``git clone https://github.com/RafaelGodoyEbert/TTS-R-pido``
+   ``git clone https://github.com/RafaelGodoyEbert/QuickTTS``
 3. Instale as dependências necessárias especificadas no arquivo `requirements.txt`.
    ``pip install -r requirements.txt``
 5. Execute o script Python `app.py`.
