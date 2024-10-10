@@ -19,8 +19,8 @@ badges = """
 """
 
 description = """
-# TTS Rápido
- TTS Rápido, para todos aqueles que sempre me pediam alguma forma de fazer algum TTS.<br>
+# QuickTTS
+ QuickTTS, para todos aqueles que sempre me pediam alguma forma de fazer algum TTS.<br>
  Tem em diversos idiomas, só aproveitar<br>
  Increva-se no canal do <a href='https://www.youtube.com/@aihubbrasil' target='_blank'>Youtube do AI HUB Brasil</a> e no meu pessoal <a href='https://www.youtube.com/@godoyy' target='_blank'>Godoyy</a>
 """

@@ -1,40 +1,49 @@
-
 import subprocess
 import os
+import json
 import gradio as gr
 from pydub import AudioSegment
-from voice_map import SUPPORTED_VOICES
 from header import badges, description
 from pydub.silence import split_on_silence
+from get_voices import get_voices
+#from adjust import remove_silence, controlador_generate_audio, generate_audio
 
-def generate_audio(texto, modelo_de_voz, velocidade):
-    if velocidade >= 0:
-        rate_str = f"+{velocidade}%"
-    else:
-        rate_str = f"{velocidade}%"
+# Load voices from JSON file
+def load_voices():
+    with open('voices.json', 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+# Get formatted voice options for specific language
+def get_voice_options(language, voices_data):
+    if language in voices_data:
+        return [f"{voice['name']} | {voice['gender']}" for voice in voices_data[language]]
+    return []
+
+# Extract voice name from formatted string
+def extract_voice_name(formatted_voice):
+    return formatted_voice.split(" | ")[0]
+
+def update_voice_options(language):
+    voices_data = load_voices()
+    voice_options = get_voice_options(language, voices_data)
+    # Retorna apenas a lista de opções e o primeiro valor
+    if voice_options:
+        return gr.Dropdown(choices=voice_options, value=voice_options[0])
+    return gr.Dropdown(choices=[], value=None)
+
+def update_voices_and_refresh():
+    # Execute get_voices to update the voices.json file
+    get_voices()
+    # Reload the voices data
+    voices_data = load_voices()
+    available_languages = list(voices_data.keys())
+    # Get initial voices for the first language
+    initial_voices = get_voice_options(available_languages[0], voices_data) if available_languages else []
     
-    output_dir = "output"
-    os.makedirs(output_dir, exist_ok=True)  # Certifique-se de que o diretório de saída exista
-
-    mp3_output_file = os.path.join(output_dir, "new_audio.mp3")
-
-    cmd = ["edge-tts", "--rate=" + rate_str, "-v", modelo_de_voz, "-t", texto, "--write-media", mp3_output_file]
-
-    print("Gerando áudio...")
-    try:
-        subprocess.run(cmd, check=True)
-    except subprocess.CalledProcessError as e:
-        print("Erro ao gerar áudio:", e)
-        return None
-
-    print("Áudio gerado com sucesso!")
-
-    # Convertendo o arquivo de MP3 para WAV
-    wav_output_file = os.path.join(output_dir, "new_audio.wav")
-    audio = AudioSegment.from_mp3(mp3_output_file)
-    audio.export(wav_output_file, format="wav")
-
-    return wav_output_file  # Retorna o caminho completo do arquivo de áudio WAV
+    return (
+        gr.Dropdown(choices=available_languages, value=available_languages[0] if available_languages else None),
+        gr.Dropdown(choices=initial_voices, value=initial_voices[0] if initial_voices else None)
+    )
 
 def remove_silence(input_file, output_file):
     audio = AudioSegment.from_wav(input_file)
@@ -50,9 +59,9 @@ def remove_silence(input_file, output_file):
     # Salva o áudio sem as partes de silêncio
     non_silent_audio.export(output_file, format="wav")
 
-def controlador_generate_audio(audio_input, voice_model_input, speed_input, checkbox_cortar_silencio):
+def controlador_generate_audio(audio_input, voice_model_input, speed_input, pitch_input, volume_input, checkbox_cortar_silencio):
     # Gerar áudio
-    audio_file = generate_audio(audio_input, voice_model_input, speed_input)
+    audio_file = generate_audio(audio_input, voice_model_input, speed_input, pitch_input, volume_input)
     if audio_file:
         print("Áudio gerado com sucesso:", audio_file)
         # Verificar se o checkbox de cortar silêncio está marcado
@@ -65,169 +74,282 @@ def controlador_generate_audio(audio_input, voice_model_input, speed_input, chec
         print("Erro ao gerar áudio.")
     return audio_file  # Retornar o caminho do arquivo de áudio
 
-from elevenlabs import voices, generate
-import requests
-
-def generate_audio_elevenlabsfree(texto, voice_name):
-    output_dir = "output"
-    os.makedirs(output_dir, exist_ok=True)  # Certifique-se de que o diretório de saída exista
-
-    try:
-        # Pegar o nome abreviado do modelo de voz
-        modelo_abreviado = voice_name
-
-        # Gerar áudio usando elevenlabs
-        audio = generate(
-            text=texto,
-            voice=modelo_abreviado,
-            model='eleven_multilingual_v2'
-        )
+def generate_audio(texto, modelo_de_voz, velocidade, tom, volume):
+    # Extract actual voice name from formatted string if necessary
+    actual_voice = extract_voice_name(modelo_de_voz)
+    
+    # Format parameters with proper signs
+    if velocidade >= 0:
+        rate_str = f"+{velocidade}%"
+    else:
+        rate_str = f"{velocidade}%"
         
-        # Caminho completo para o arquivo de saída
-        output_file_path = os.path.join(output_dir, "new_audio.wav")
-
-        # Escrever os dados do áudio no arquivo WAV
-        with open(output_file_path, 'wb') as wf:
-            wf.write(audio)
-
-        print("Áudio gerado com sucesso em:", output_file_path)
-        return output_file_path
-    except Exception as e:
+    if tom >= 0:
+        pitch_str = f"+{tom}Hz"
+    else:
+        pitch_str = f"{tom}Hz"
+        
+    if volume >= 0:
+        volume_str = f"+{volume}%"
+    else:
+        volume_str = f"{volume}%"
+    
+    output_dir = "output"
+    os.makedirs(output_dir, exist_ok=True)
+    mp3_output_file = os.path.join(output_dir, "new_audio.mp3")
+    
+    cmd = [
+        "edge-tts",
+        "--rate=" + rate_str,
+        "--pitch=" + pitch_str,
+        "--volume=" + volume_str,
+        "-v", actual_voice,
+        "-t", texto,
+        "--write-media", mp3_output_file
+    ]
+    
+    print("Gerando áudio...")
+    try:
+        subprocess.run(cmd, check=True)
+    except subprocess.CalledProcessError as e:
         print("Erro ao gerar áudio:", e)
+        return None
+        
+    print("Áudio gerado com sucesso!")
+    wav_output_file = os.path.join(output_dir, "new_audio.wav")
+    audio = AudioSegment.from_mp3(mp3_output_file)
+    audio.export(wav_output_file, format="wav")
+    return wav_output_file
+
+def generate_audio_from_file(file_path, modelo_de_voz, velocidade, tom, volume):
+    # Extrai o nome real da voz formatada, se necessário
+    actual_voice = extract_voice_name(modelo_de_voz)
+    
+    # Formatação dos parâmetros com sinais adequados
+    rate_str = f"+{velocidade}%" if velocidade >= 0 else f"{velocidade}%"
+    pitch_str = f"+{tom}Hz" if tom >= 0 else f"{tom}Hz"
+    volume_str = f"+{volume}%" if volume >= 0 else f"{volume}%"
+    
+    output_dir = "output"
+    os.makedirs(output_dir, exist_ok=True)
+    mp3_output_file = os.path.join(output_dir, "new_audio.mp3")
+    
+    # Usar -f FILE para passar o caminho do arquivo de texto
+    cmd = [
+        "edge-tts",
+        "-f", file_path,   # Certificar que o conteúdo do arquivo seja texto puro
+        "--rate=" + rate_str,
+        "--pitch=" + pitch_str,
+        "--volume=" + volume_str,
+        "-v", actual_voice,
+        "--write-media", mp3_output_file
+    ]
+    
+    print("Gerando áudio do arquivo...")
+    try:
+        subprocess.run(cmd, check=True)
+    except subprocess.CalledProcessError as e:
+        print("Erro ao gerar áudio:", e)
+        return None
+        
+    print("Áudio gerado com sucesso!")
+    wav_output_file = os.path.join(output_dir, "new_audio.wav")
+    audio = AudioSegment.from_mp3(mp3_output_file)
+    audio.export(wav_output_file, format="wav")
+    return wav_output_file
+
+def controlador_generate_audio_from_file(file, voice_model_input, speed_input, pitch_input, volume_input, checkbox_cortar_silencio):
+    if file is None:
         return None
     
-def elevenlabsAPI(audio_input_elevenlabs_api, voice_model_input,model_elevenlabs_t, stability_elevenlabs, similarity_boost_elevenlabs, style_elevenlabs, use_speaker_boost_elevenlabs, id_voz_input, id_api, output_dir="output"):
-    try:
-        if not id_api.strip():
-            print("API não fornecida.")
-            return None
+    # Neste caso, o 'file' já é o caminho do arquivo, então não precisa reescrever
+    temp_file_path = file  # Caminho do arquivo que você recebe do Gradio
+    
+    # Gerar o áudio
+    audio_file = generate_audio_from_file(temp_file_path, voice_model_input, speed_input, pitch_input, volume_input)
+    
+    if audio_file:
+        print("Áudio gerado com sucesso:", audio_file)
+        if checkbox_cortar_silencio:
+            print("Cortando silêncio...")
+            remove_silence(audio_file, audio_file)
+            print("Silêncio removido com sucesso!")
+    else:
+        print("Erro ao gerar áudio.")
+    
+    return audio_file
 
-        id_api_value = id_api
-        modelos= model_elevenlabs_t
-
-        if id_voz_input.strip():  # Se um ID de voz foi fornecido
-            voice_id = id_voz_input
-            print(voice_id)
-            url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
-            headers = {
-                "Accept": "audio/mpeg",
-                "Content-Type": "application/json",
-                "xi-api-key": id_api
-            }
-            print(modelos)
-            print(stability_elevenlabs)
-            print(similarity_boost_elevenlabs)
-            print(style_elevenlabs)
-            print(use_speaker_boost_elevenlabs)
-            data = {
-                "text": audio_input_elevenlabs_api,
-                "model_id": modelos,
-                "voice_settings": {
-                    "stability": stability_elevenlabs,
-                    "similarity_boost": similarity_boost_elevenlabs,
-                    "style": style_elevenlabs, 
-                    "use_speaker_boost": use_speaker_boost_elevenlabs,
-                }
-            }
-            print(data)
-
-            response = requests.post(url, headers=headers, json=data)
-            if response.status_code == 200:
-                audio = response.content
-            else:
-                print("Erro ao gerar áudio:", response.text)
-                return None
-        else:  # Se nenhum ID de voz foi fornecido, usar o modelo de voz fornecido
-            print(modelos)
-            print(stability_elevenlabs)
-            print(similarity_boost_elevenlabs)
-            print(style_elevenlabs)
-            print(use_speaker_boost_elevenlabs)
-            audio = generate(
-                text=audio_input_elevenlabs_api,
-                voice=voice_model_input,
-                # voice=Voice(
-                #     voice_id='EXAVITQu4vr4xnSDxMaL',
-                #     name=voice_model_input,
-                #     settings=VoiceSettings(stability=stability_elevenlabs, similarity_boost=similarity_boost_elevenlabs, style=style_elevenlabs, use_speaker_boost=use_speaker_boost_elevenlabs)
-                # ),
-                model=modelos,
-                api_key=id_api
-            )
-
-        if audio:
-            output_file_path = os.path.join(output_dir, "new_audio.wav")
-            with open(output_file_path, 'wb') as wf:
-                wf.write(audio)
-            print("Áudio gerado com sucesso em:", output_file_path)
-            return output_file_path
-    except Exception as e:
-        print("Erro ao gerar áudio:", e)
-        return None
-
-all_voices = voices()
-with gr.Blocks(theme=gr.themes.Default(primary_hue="green", secondary_hue="blue"), title="TTS Rápido") as iface:
+with gr.Blocks(theme=gr.themes.Default(primary_hue="green", secondary_hue="blue"), title="QuickTTS") as iface:
     gr.Markdown(badges)
     gr.Markdown(description)
-    title="TTS Rápido"
-    description="Digite o texto, escolha o modelo de voz e ajuste a velocidade para gerar um áudio. O áudio resultante pode ser reproduzido diretamente no Gradio."
+    
+    voices_data = load_voices()
+    available_languages = list(voices_data.keys())
 
     with gr.Tabs():
         with gr.TabItem("Edge-TTS"):
-            gr.Markdown("Botei todos os idiomas possível, até onde testei, é ilimitado, podendo até mesmo colocar um livro inteiro, mas claro, tem a questão de tempo, quanto maior o texto, mais demorado é.")
-            # Defina os elementos de entrada e saída
+            gr.Markdown("É ilimitado, podendo até mesmo colocar um livro inteiro, mas claro, tem a questão de tempo, quanto maior o texto, mais demorado é, dublagem por SRT talvez um dia eu bote.")
+            
+            with gr.Row():
+                # Language selection dropdown
+                language_input = gr.Dropdown(
+                    choices=available_languages,
+                    label="Idioma",
+                    value=available_languages[52] if available_languages else None
+                )
+                
+                # Voice model dropdown (will be updated based on language selection)
+                initial_voices = get_voice_options(available_languages[52], voices_data) if available_languages else []
+                voice_model_input = gr.Dropdown(
+                    choices=initial_voices,
+                    label="Modelo de Voz",
+                    value=initial_voices[0] if initial_voices else None
+                )
+            
+            # Connect language selection to voice model update
+            language_input.change(
+                fn=update_voice_options,
+                inputs=[language_input],
+                outputs=[voice_model_input]
+            )
+            
             audio_input = gr.Textbox(label="Texto", value='Texto de exemplo!', interactive=True)
-            voice_model_input = gr.Dropdown(SUPPORTED_VOICES, label="Modelo de Voz", value="pt-BR-AntonioNeural")
-            speed_input = gr.Slider(minimum=-200, maximum=200, label="Velocidade (%)", value=0, interactive=True)
+            
+            with gr.Row():
+                with gr.Column():
+                    speed_input = gr.Slider(
+                        minimum=-200, 
+                        maximum=200, 
+                        label="Velocidade (%)", 
+                        value=0, 
+                        interactive=True
+                    )
+                with gr.Column():
+                    pitch_input = gr.Slider(
+                        minimum=-100, 
+                        maximum=100, 
+                        label="Tom (Hz)", 
+                        value=0, 
+                        interactive=True
+                    )
+                with gr.Column():
+                    volume_input = gr.Slider(
+                        minimum=-99, 
+                        maximum=100, 
+                        label="Volume (%)", 
+                        value=0, 
+                        interactive=True
+                    )
+            
             checkbox_cortar_silencio = gr.Checkbox(label="Cortar Silencio", interactive=True)
             audio_output = gr.Audio(label="Resultado", type="filepath", interactive=False)
-            edgetts_button = gr.Button(value="Falar")
-            edgetts_button.click(controlador_generate_audio, inputs=[audio_input, voice_model_input, speed_input, checkbox_cortar_silencio], outputs=[audio_output])
-            #edgetts_button = gr.Button(value="Falar")
-            #edgetts_button.click(fn=generate_audio, inputs=[audio_input, voice_model_input, speed_input], outputs=[audio_output])
-            clear_button = gr.ClearButton(audio_input, value='Limpar')
-            gr.Markdown("Agradecimentos a rany2 pelo Edge-TTS")
-
-        with gr.TabItem("Elevenlabs"):
-            with gr.TabItem("Elevenlabs Free"):
-                gr.Markdown("Esse é a API gratuita que é disponivel pela própria Elevenlabs, não sei os limites, mas sei que tem, acredito que após 3 requests seguidos já caia, então tenha certeza o texto que vá usar.")
-                audio_input = gr.Textbox(label="Texto (Não botei limite de caracteres, mas não sei se tem limite no request)", value='Texto de exemplo!', interactive=True)
-                voice_model_input = gr.Dropdown([ voice.name for voice in all_voices], label="Modelo de Voz", value='Adam', interactive=True)
-                gr.Markdown("Se estiver usando huggingface e não rodar, vá em logs, que está acima da imagem do github e veja se já não passou o limite de request da API")
-                audio_output = gr.Audio(label="Resultado", type="filepath", interactive=False)
-                elevenlabs_button = gr.Button(value="Falar")
-                elevenlabs_button.click(fn=generate_audio_elevenlabsfree, inputs=[audio_input, voice_model_input], outputs=[audio_output])
+            
+            with gr.Row():
+                edgetts_button = gr.Button(value="Falar")
+                edgetts_button.click(
+                    controlador_generate_audio,
+                    inputs=[
+                        audio_input, 
+                        voice_model_input, 
+                        speed_input, 
+                        pitch_input,  # New input
+                        volume_input,  # New input
+                        checkbox_cortar_silencio
+                    ],
+                    outputs=[audio_output]
+                )
+                
                 clear_button = gr.ClearButton(audio_input, value='Limpar')
-                gr.Markdown("Agradecimentos ao Elevenlabs")
-            with gr.TabItem("Elevenlabs com API"):
-                gr.Markdown("Versão com API, basicamente mesma coisa que o site, mas por algum motivo as pessoas me pediram")
-                audio_input_elevenlabs_api = gr.Textbox(label="Texto (Acho que o limite é 2500 caracteres)", value='Texto de exemplo!', interactive=True)
-                with gr.Row():
-                    id_api = gr.Textbox(label="Digite sua API (Obrigatório)", interactive=True)
-                    voice_model_input = gr.Dropdown([ voice.name for voice in all_voices], label="Modelo de Voz", value="Adam", interactive=True)
-                    id_voz_input = gr.Textbox(label="Ou digite o ID da voz", interactive=True)
-                gr.Markdown("Abaixo só funciona o Modelo (multilingual_v1,v2,mono), só funciona todas abaixo se tiver com o ID de voz (Por enquanto). <br> <a href='https://api.elevenlabs.io/v1/voices' target='_blank'>Nesse link</a> tem ID de voz, só filtrar por voice_id")
-                with gr.Row():
-                    model_elevenlabs_t = gr.Dropdown(['eleven_multilingual_v2', 'eleven_multilingual_v1', 'eleven_monolingual_v1'], label="Modelo", value='eleven_multilingual_v2', interactive=True)
-                    stability_elevenlabs = gr.Slider(0, 1, step=0.1, label="Establidade", value=0.67, interactive=True)
-                    similarity_boost_elevenlabs = gr.Slider(0, 1, step=0.1, label="Claridade + Similaridade", value=0.8, interactive=True)
-                    style_elevenlabs = gr.Slider(0, 1, step=0.1, label="Exagero de estilo", value=0.0, interactive=True)
-                    use_speaker_boost_elevenlabs = gr.Checkbox(label="Speaker Boost", value=True, interactive=True)
-                gr.Markdown("Se estiver usando huggingface e não rodar, vá em logs, que está acima da imagem do github e veja se já não passou o limite de request da API")
-                audio_output = gr.Audio(label="Resultado", type="filepath", interactive=False)
-                elevenlabs_button = gr.Button(value="Falar")
-                elevenlabs_button.click(fn=elevenlabsAPI, inputs=[audio_input_elevenlabs_api, voice_model_input, model_elevenlabs_t, stability_elevenlabs, similarity_boost_elevenlabs, style_elevenlabs, use_speaker_boost_elevenlabs, id_voz_input, id_api], outputs=[audio_output])
-                clear_button = gr.ClearButton(audio_input_elevenlabs_api, value='Limpar')
-                gr.Markdown("Agradecimentos ao Elevenlabs")
-        with gr.TabItem("Conqui-TTS"):
-            gr.Markdown("Em DEV - Conqui")
-            # Chame a função do arquivo conqui.py para criar os blocos específicos
-            # tabs_conqui = conqui.criar_tab_conqui()
-            # Adicione os blocos criados ao bloco principal
-            # gr.Component(tabs_conqui)
-            # Executar o aplicativo Gradio
+            
+            # Add update voices button at the top
+            update_voices_btn = gr.Button(value="Atualizar Lista de Vozes")
+            # Connect update voices button to refresh function
+            update_voices_btn.click(
+                fn=update_voices_and_refresh,
+                inputs=[],
+                outputs=[language_input, voice_model_input]
+            )
+            gr.Markdown("Agradecimentos a rany2 pelo Edge-TTS")
+            
+        with gr.TabItem("Lote (Arquivo txt)"):
+            gr.Markdown("Carregar texto de um arquivo")            
+            # Language and voice selection (same as first tab)
+            with gr.Row():
+                language_input_file = gr.Dropdown(
+                    choices=available_languages,
+                    label="Idioma",
+                    value=available_languages[52] if available_languages else None
+                )
+                
+                initial_voices = get_voice_options(available_languages[52], voices_data) if available_languages else []
+                voice_model_input_file = gr.Dropdown(
+                    choices=initial_voices,
+                    label="Modelo de Voz",
+                    value=initial_voices[0] if initial_voices else None
+                )
+            
+            language_input_file.change(
+                fn=update_voice_options,
+                inputs=[language_input_file],
+                outputs=[voice_model_input_file]
+            )
+            gr.Markdown("O programa vai ler linha por linha e entregar em um único áudio")      
+            # File input
+            file_input = gr.File(
+                label="Arquivo de Texto",
+                file_types=[".txt"],
+                type="filepath"
+            )
+            
+            with gr.Row():
+                with gr.Column():
+                    speed_input_file = gr.Slider(
+                        minimum=-200, 
+                        maximum=200, 
+                        label="Velocidade (%)", 
+                        value=0, 
+                        interactive=True
+                    )
+                with gr.Column():
+                    pitch_input_file = gr.Slider(
+                        minimum=-100, 
+                        maximum=100, 
+                        label="Tom (Hz)", 
+                        value=0, 
+                        interactive=True
+                    )
+                with gr.Column():
+                    volume_input_file = gr.Slider(
+                        minimum=-99, 
+                        maximum=100, 
+                        label="Volume (%)", 
+                        value=0, 
+                        interactive=True
+                    )
+            
+            checkbox_cortar_silencio_file = gr.Checkbox(label="Cortar Silencio", interactive=True)
+            audio_output_file = gr.Audio(label="Resultado", type="filepath", interactive=False)
+            with gr.Row():
+                edgetts_button_file = gr.Button(value="Falar")
+                edgetts_button_file.click(
+                    controlador_generate_audio_from_file,
+                    inputs=[
+                        file_input,
+                        voice_model_input_file,
+                        speed_input_file,
+                        pitch_input_file,
+                        volume_input_file,
+                        checkbox_cortar_silencio_file
+                    ],
+                    outputs=[audio_output_file]
+                )
+                
+                clear_button_file = gr.ClearButton(file_input, value='Limpar')
+            
+            gr.Markdown("Agradecimentos a rany2 pelo Edge-TTS")
+            
         gr.Markdown("""
                     Desenvolvido por Rafael Godoy <br>
                     Apoie o projeto pelo https://nubank.com.br/pagar/1ls6a4/0QpSSbWBSq, qualquer valor é bem vindo.
                     """)
-        iface.launch()
+    iface.launch()
