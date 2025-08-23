@@ -133,7 +133,8 @@ async def process_srt_file_tiktok(srt_file_path, voice_str, output_dir_str, srt_
 
 def controlador_process_srt_file_tiktok(srt_file, voice_str, srt_temp_deleta, progress=None):
     if not srt_file: return None
-    output_dir = "output/srt_temp"
+    srt_filename_stem = Path(srt_file.name).stem
+    output_dir = f"output/srt_temp_{srt_filename_stem}"
     
     try:
         return asyncio.run(process_srt_file_tiktok(srt_file.name, voice_str, output_dir, srt_temp_deleta, progress=progress))

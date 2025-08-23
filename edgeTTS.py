@@ -125,6 +125,7 @@ async def process_srt_file(srt_file_path, voice, output_dir_str, pitch, volume, 
 def controlador_process_srt_file(srt_file, voice_model_input, pitch, volume, srt_temp_deleta, progress=None):
     if not srt_file: return None
     actual_voice = extract_voice_name(voice_model_input)
-    output_dir = "output/srt_temp"
+    srt_filename_stem = Path(srt_file.name).stem
+    output_dir = f"output/srt_temp_{srt_filename_stem}"
     
     return asyncio.run(process_srt_file(srt_file.name, actual_voice, output_dir, pitch, volume, srt_temp_deleta))
