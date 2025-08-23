@@ -8,8 +8,11 @@
 
 ---
 
-![Visão Geral do QuickTTS](https://github.com/user-attachments/assets/72af9d64-4857-4eef-9a1b-59558804696d)
-*Interface principal mostrando a seleção de provedores e as opções de áudio.*
+<img width="1180" height="592" alt="image" src="https://github.com/user-attachments/assets/0b755bcf-98f1-4673-825f-47591a953715" />
+_Interface principal mostrando a seleção de provedores e as opções de áudio._ <br>
+
+<img width="1191" height="738" alt="image" src="https://github.com/user-attachments/assets/233b2663-bc27-4c0c-8b58-d4e167be2129" />
+_Interface de SRT mostrando a seleção de provedores e as opções de áudio e progressão._
 
 ## ✨ Funcionalidades Principais
 
