@@ -103,7 +103,7 @@ with gr.Blocks(theme=gr.themes.Default(primary_hue="green", secondary_hue="blue"
                 # ADICIONADO: Checkbox para o TikTok
                 checkbox_cortar_silencio_tiktok = gr.Checkbox(label="Cortar Silencio", interactive=True)
 
-            audio_output = gr.Audio(label="Resultado", type="filepath", interactive=False)
+            audio_output = gr.Audio(label="Resultado", type="filepath", interactive=False, show_download_button=True)
             with gr.Row():
                 gerar_button = gr.Button(value="Falar")
                 clear_button = gr.ClearButton(components=[audio_input, tiktok_audio_input], value='Limpar Texto')
@@ -160,7 +160,7 @@ with gr.Blocks(theme=gr.themes.Default(primary_hue="green", secondary_hue="blue"
                 # ADICIONADO: Checkbox para o TikTok em lote
                 checkbox_cortar_silencio_tiktok_file = gr.Checkbox(label="Cortar Silencio", interactive=True)
 
-            audio_output_file = gr.Audio(label="Resultado", type="filepath", interactive=False)
+            audio_output_file = gr.Audio(label="Resultado", type="filepath", interactive=False, show_download_button=True)
             with gr.Row():
                 gerar_button_file = gr.Button(value="Falar")
                 clear_button_file = gr.ClearButton(file_input, value='Limpar')
@@ -217,7 +217,7 @@ with gr.Blocks(theme=gr.themes.Default(primary_hue="green", secondary_hue="blue"
 
                     # --- Componentes Comuns ---
                     srt_input = gr.File(label="Arquivo SRT", file_types=[".srt"], type="filepath")
-                    audio_output_srt = gr.Audio(label="Resultado", type="filepath", interactive=False)
+                    audio_output_srt = gr.Audio(label="Resultado", type="filepath", interactive=False, show_download_button=True)
                     progress_bar_srt = gr.Progress(track_tqdm=True)
                     # --- ADICIONADO: Componente de Exemplos ---
                     gr.Examples(
@@ -266,7 +266,7 @@ with gr.Blocks(theme=gr.themes.Default(primary_hue="green", secondary_hue="blue"
                     audio_list_target.change(lambda x: x, inputs=[audio_list_target], outputs=[audio_list])
                     play_button = gr.Button(value="Tocar")
                     refresh_button = gr.Button(value="Atualizar Lista")
-                    audio_player = gr.Audio(label="Reproduzir", type="filepath", interactive=False)
+                    audio_player = gr.Audio(label="Reproduzir", type="filepath", interactive=False, show_download_button=True)
                     status_message = gr.Textbox(label="Status", interactive=False, visible=True)
                     
                     def update_audio_list():
