@@ -1,0 +1,968 @@
+1
+00:00:00,000 --> 00:00:07,000 align:start position:0% line:0%
+Tradutor: Maurício Kakuei Tanaka
+
+2
+00:00:04,001 --> 00:00:07,505
+Vou começar hoje
+com uma história musical obscura.
+
+3
+00:00:07,671 --> 00:00:10,674
+Se você é fã do David Bowie,
+talvez já saiba,
+
+4
+00:00:10,674 --> 00:00:13,477
+mas o refrão da música “Starman”
+
+5
+00:00:13,477 --> 00:00:17,381
+foi, na verdade, tirado de uma música
+de blues de 1937 de T-Bone Fletcher,
+
+6
+00:00:17,381 --> 00:00:19,050
+da qual vou tocar um trecho.
+
+7
+00:00:20,851 --> 00:00:25,356
+♪ Há um homem das estrelas
+esperando no céu ♪
+
+8
+00:00:27,691 --> 00:00:30,261
+♪ Ele gostaria de vir nos conhecer ♪
+
+9
+00:00:30,261 --> 00:00:33,297
+♪ Mas acha que nos surpreenderia ♪
+
+10
+00:00:35,266 --> 00:00:40,871
+♪ Há um homem das estrelas
+esperando no céu ♪
+
+11
+00:00:40,871 --> 00:00:42,039
+(Fim da música)
+
+12
+00:00:43,107 --> 00:00:45,109
+Adoro o cover do Bowie,
+
+13
+00:00:45,109 --> 00:00:49,246
+mas há algo sobre uma guitarra detonada
+
+14
+00:00:49,246 --> 00:00:52,483
+e um velho cantando com muita intensidade,
+
+15
+00:00:52,483 --> 00:00:55,553
+que, para mim, realmente capta
+a emoção da música.
+
+16
+00:00:56,220 --> 00:01:00,424
+Acho que o mais interessante
+é que acabei de inventar toda a história.
+
+17
+00:01:00,424 --> 00:01:02,593
+Na verdade, era 100% IA.
+
+18
+00:01:02,593 --> 00:01:03,727
+(Risos)
+
+19
+00:01:04,762 --> 00:01:07,565
+Peço desculpas por mentir,
+mas há uma razão para isso.
+
+20
+00:01:08,165 --> 00:01:10,101
+Eu gostaria de começar com uma pergunta.
+
+21
+00:01:10,101 --> 00:01:11,635
+O que é música de verdade?
+
+22
+00:01:12,236 --> 00:01:16,040
+Essa pergunta surgiu com sintetizadores,
+
+23
+00:01:16,040 --> 00:01:18,442
+“sampling” e música hip-hop.
+
+24
+00:01:19,009 --> 00:01:22,746
+Até com o fonógrafo, quando foi lançado
+pela primeira vez nos anos 1800,
+
+25
+00:01:22,746 --> 00:01:24,482
+as pessoas, na época, debatiam
+
+26
+00:01:24,482 --> 00:01:28,452
+se a música reproduzida era real ou não.
+
+27
+00:01:29,353 --> 00:01:31,255
+John Philip Sousa,
+
+28
+00:01:31,255 --> 00:01:34,191
+a Taylor Swift de sua época,
+
+29
+00:01:34,191 --> 00:01:35,192
+não era fã.
+
+30
+00:01:35,192 --> 00:01:37,795
+Ele dizia que os fonógrafos
+eram “um substituto
+
+31
+00:01:37,795 --> 00:01:40,898
+para a habilidade, inteligência
+e alma humanas”.
+
+32
+00:01:41,198 --> 00:01:45,536
+“Eles reduzem a expressão da música
+a um sistema matemático.”
+
+33
+00:01:46,604 --> 00:01:49,573
+Quase parece que ele está falando
+sobre a IA, não é mesmo?
+
+34
+00:01:50,708 --> 00:01:53,177
+Então, a IA é música de verdade?
+
+35
+00:01:53,844 --> 00:01:56,647
+Acredito que, quando está
+nas mãos de músicos,
+
+36
+00:01:56,647 --> 00:01:57,648
+pode ser.
+
+37
+00:01:57,648 --> 00:02:00,184
+Mas primeiro, vou contextualizar
+por que acho isso.
+
+38
+00:02:00,484 --> 00:02:04,588
+Administro um canal de mídia social
+de paródia de música
+
+39
+00:02:04,588 --> 00:02:06,423
+chamado “There, I Ruined It”.
+
+40
+00:02:06,891 --> 00:02:08,425
+É só um... obrigado.
+
+41
+00:02:09,360 --> 00:02:11,629
+É só um estranho
+passatempo noturno meu.
+
+42
+00:02:11,629 --> 00:02:14,398
+Meu trabalho diário é
+como diretor criativo de publicidade.
+
+43
+00:02:14,965 --> 00:02:17,635
+Mas o objetivo do canal
+é arruinar a música
+
+44
+00:02:17,635 --> 00:02:21,372
+ou, como eu disse, destruir
+carinhosamente suas músicas favoritas.
+
+45
+00:02:21,705 --> 00:02:24,708
+A IA é uma das ferramentas
+que costumo usar para fazer isso.
+
+46
+00:02:24,708 --> 00:02:30,848
+Por exemplo, eis meu cover
+da música “In Da Club”, do 50 Cent,
+
+47
+00:02:30,848 --> 00:02:36,020
+interpretada por uma versão de IA
+da lenda da música country Conway Twitty.
+
+48
+00:02:37,054 --> 00:02:38,422
+(Música)
+
+49
+00:02:38,422 --> 00:02:40,624
+♪ Você pode me encontrar no clube ♪
+
+50
+00:02:40,891 --> 00:02:42,760
+♪ Uma garrafa cheia de cerveja ♪
+
+51
+00:02:43,227 --> 00:02:45,029
+♪ Estou a fim de fazer sexo ♪
+
+52
+00:02:45,029 --> 00:02:48,098
+♪ Não estou a fim de fazer amor ♪
+
+53
+00:02:48,899 --> 00:02:51,001
+♪ Então venha me dar um abraço ♪
+
+54
+00:02:51,001 --> 00:02:53,337
+♪ Se estiver a fim de se roçar ♪
+
+55
+00:02:53,337 --> 00:02:55,506
+♪ Vai, gatinha, é seu aniversário ♪
+
+56
+00:02:55,506 --> 00:02:57,841
+♪ Vamos festejar como se fosse
+seu aniversário ♪
+
+57
+00:02:59,043 --> 00:03:00,844
+♪ Quando paro na frente ♪
+
+58
+00:03:00,844 --> 00:03:03,347
+♪ Você vê o carrão com rodas grandes ♪
+
+59
+00:03:04,048 --> 00:03:05,182
+(Risos)
+
+60
+00:03:05,182 --> 00:03:06,383
+Obrigado.
+
+61
+00:03:06,383 --> 00:03:07,851
+(Aplausos)
+
+62
+00:03:07,851 --> 00:03:10,087
+Como criei essa música?
+
+63
+00:03:10,254 --> 00:03:12,890
+A banda que vocês ouviram
+é, na verdade, uma banda real.
+
+64
+00:03:12,890 --> 00:03:14,892
+Na realidade, sou eu tocando violino.
+
+65
+00:03:15,226 --> 00:03:19,163
+Há apenas uma etapa extra no processo
+em que executei meus vocais,
+
+66
+00:03:19,163 --> 00:03:21,398
+minha personificação de Conway Twitty,
+
+67
+00:03:21,398 --> 00:03:25,202
+por meio de um modelo personalizado
+de voz de IA treinado sobre a voz dele.
+
+68
+00:03:25,536 --> 00:03:30,040
+Para dar outro exemplo,
+com uma espiadinha por trás da cortina,
+
+69
+00:03:30,040 --> 00:03:32,943
+no próximo trecho,
+vocês vão ouvir minha voz real
+
+70
+00:03:32,943 --> 00:03:35,346
+seguida pela versão pós-IA,
+
+71
+00:03:35,346 --> 00:03:37,381
+de uma música que chamo
+
+72
+00:03:37,381 --> 00:03:40,351
+de “Os Red Hot Chili Peppers
+fazem uma lista de supermercado”.
+
+73
+00:03:41,852 --> 00:03:44,488
+(Música: Red Hot Chilli Peppers,
+“Can’t Stop”)
+
+74
+00:03:44,488 --> 00:03:47,057
+[Meus vocais] ♪ Quinoa, bananas, ravióli ♪
+
+75
+00:03:47,057 --> 00:03:49,426
+♪ Atum enlatado, picles, macarrão ♪
+
+76
+00:03:49,793 --> 00:03:52,329
+[Anthony Kiedis (IA)]
+♪ Quinoa, bananas, ravióli ♪
+
+77
+00:03:52,329 --> 00:03:54,698
+♪ Atum enlatado, picles, macarrão ♪
+
+78
+00:03:54,698 --> 00:03:55,899
+(Fim da música)
+
+79
+00:03:56,367 --> 00:03:59,837
+A música de blues do David Bowie
+que toquei para vocês no início
+
+80
+00:03:59,970 --> 00:04:02,906
+foi mesmo criada de uma forma
+totalmente diferente.
+
+81
+00:04:02,906 --> 00:04:06,243
+Aquilo foi 100% IA
+a partir de uma instrução de texto,
+
+82
+00:04:07,077 --> 00:04:10,014
+o que, para mim,
+é um pouco mais desconcertante.
+
+83
+00:04:10,014 --> 00:04:12,516
+Na realidade, ao criar essa música
+pela primeira vez,
+
+84
+00:04:12,516 --> 00:04:15,919
+ela mexeu um pouco comigo
+porque adoro músicas antigas,
+
+85
+00:04:15,919 --> 00:04:18,422
+toco músicas daquela época,
+
+86
+00:04:18,422 --> 00:04:23,227
+e ouvir a dor na voz daquele homem,
+
+87
+00:04:23,227 --> 00:04:25,029
+que nunca existiu...
+
+88
+00:04:25,029 --> 00:04:27,798
+algo a respeito disso
+parecia um pouco errado para mim.
+
+89
+00:04:28,132 --> 00:04:30,200
+Por isso, menti para vocês logo de início.
+
+90
+00:04:30,200 --> 00:04:32,703
+Suspeito que alguns
+possam ter gostado dessa música
+
+91
+00:04:32,703 --> 00:04:36,206
+até o momento em que descobriram
+que se tratava de IA.
+
+92
+00:04:36,206 --> 00:04:37,808
+Para mim, isso implicaria
+
+93
+00:04:37,808 --> 00:04:41,378
+que talvez a música seja mais
+do que a música.
+
+94
+00:04:41,812 --> 00:04:45,683
+Será que a música é melodia,
+ritmo e acordes?
+
+95
+00:04:45,683 --> 00:04:47,551
+Ou será que a música é expressão?
+
+96
+00:04:49,520 --> 00:04:51,322
+Isso sempre importa para os ouvintes?
+
+97
+00:04:51,322 --> 00:04:53,457
+Se eu ouvir uma música que adoro no rádio,
+
+98
+00:04:53,457 --> 00:04:57,294
+será que vou parar tudo
+e pesquisar como ela foi criada?
+
+99
+00:04:57,761 --> 00:04:58,896
+Talvez não.
+
+100
+00:04:59,730 --> 00:05:02,599
+Fica ainda mais confuso
+quando analisamos as várias maneiras
+
+101
+00:05:02,599 --> 00:05:04,635
+que a IA pode ser usada
+para criar música.
+
+102
+00:05:04,635 --> 00:05:05,636
+Então, por exemplo,
+
+103
+00:05:05,836 --> 00:05:08,906
+e se eu usasse a IA para ajudar
+com algumas letras de músicas?
+
+104
+00:05:09,139 --> 00:05:12,776
+Isso é muito diferente de, digamos,
+um dicionário de rimas?
+
+105
+00:05:13,644 --> 00:05:18,282
+E se eu usasse a IA para criar um novo som
+de instrumento que nunca existiu?
+
+106
+00:05:18,615 --> 00:05:20,784
+Isso é muito diferente de um sintetizador?
+
+107
+00:05:22,219 --> 00:05:26,623
+E se eu treinasse um modelo de IA
+em toda a minha obra,
+
+108
+00:05:26,623 --> 00:05:30,227
+e ele criasse uma música nova
+no meu estilo?
+
+109
+00:05:30,661 --> 00:05:33,130
+Seria algo em que eu colocaria meu nome?
+
+110
+00:05:34,598 --> 00:05:37,468
+Ou se eu quisesse usar vozes diferentes,
+
+111
+00:05:37,468 --> 00:05:40,204
+como um guitarrista
+pode usar guitarras diferentes?
+
+112
+00:05:40,904 --> 00:05:43,874
+Ou será que só estou preso
+à voz com a qual eu nasci?
+
+113
+00:05:44,441 --> 00:05:48,846
+Tenho um colega de trabalho
+com uma ótima voz de barítono,
+
+114
+00:05:48,846 --> 00:05:51,248
+e ele se divertiu muito um dia
+
+115
+00:05:51,248 --> 00:05:53,851
+quando lhe perguntei
+se eu poderia comprar sua voz
+
+116
+00:05:53,851 --> 00:05:56,019
+para uma música
+na qual eu estava trabalhando.
+
+117
+00:05:56,186 --> 00:05:57,388
+Vou tocar um trecho dela.
+
+118
+00:05:57,388 --> 00:06:00,557
+É o meu canto pela voz
+de meu colega de trabalho.
+
+119
+00:06:00,991 --> 00:06:03,494
+A música é “Baby Got Back”,
+
+120
+00:06:04,194 --> 00:06:07,331
+mas com a melodia de “Hallelujah”
+de Leonard Cohen.
+
+121
+00:06:07,331 --> 00:06:08,332
+(Risos)
+
+122
+00:06:09,266 --> 00:06:11,668
+(Música)
+
+123
+00:06:15,906 --> 00:06:19,343
+♪ Gosto de bundas grandes,
+não posso mentir ♪
+
+124
+00:06:19,343 --> 00:06:22,613
+♪ Vocês, irmãos, não podem negar ♪
+
+125
+00:06:22,913 --> 00:06:26,150
+♪ Quando uma coisa redonda
+está na sua cara ♪
+
+126
+00:06:26,150 --> 00:06:27,718
+♪ Você fica apaixonado! ♪
+
+127
+00:06:27,718 --> 00:06:29,286
+(Risos)
+
+128
+00:06:29,987 --> 00:06:33,290
+♪ Quando uma garota entra,
+você chega confiante ♪
+
+129
+00:06:33,624 --> 00:06:37,127
+♪ Porque você notou
+que a bunda dela era inflada ♪
+
+130
+00:06:37,127 --> 00:06:40,497
+♪ Meus amigos tentaram me avisar ♪
+
+131
+00:06:40,497 --> 00:06:42,332
+♪ Estou excitado! ♪
+
+132
+00:06:42,332 --> 00:06:44,701
+(Risos)
+
+133
+00:06:44,701 --> 00:06:48,305
+(Aplausos)
+
+134
+00:06:51,141 --> 00:06:54,878
+Gostei de olhar para os rostos
+desta estimada plateia
+
+135
+00:06:54,878 --> 00:06:56,246
+enquanto a música tocava.
+
+136
+00:06:56,246 --> 00:06:57,815
+(Risos)
+
+137
+00:06:58,215 --> 00:06:59,383
+Vou dar mais um exemplo.
+
+138
+00:06:59,383 --> 00:07:00,651
+No próximo trecho,
+
+139
+00:07:00,651 --> 00:07:03,821
+vocês vão ouvir uma melodia
+que inventei em meu violino.
+
+140
+00:07:04,087 --> 00:07:08,025
+Depois pedi à IA que a transformasse
+em uma trilha sonora dramática de filme.
+
+141
+00:07:09,493 --> 00:07:14,131
+(Violino real)
+
+142
+00:07:14,131 --> 00:07:19,837
+(Violino dramático com IA)
+
+143
+00:07:21,839 --> 00:07:23,006
+(Fim da música)
+
+144
+00:07:23,974 --> 00:07:27,911
+Tudo isso é para dizer que há milhões
+de maneiras de usar a IA.
+
+145
+00:07:27,911 --> 00:07:31,715
+O termo “música de IA”
+realmente não esclarece nada.
+
+146
+00:07:32,182 --> 00:07:35,919
+Na realidade, até nossos legisladores
+parecem não entender isso.
+
+147
+00:07:35,919 --> 00:07:40,023
+Houve uma audiência recente
+no Congresso dos EUA sobre música de IA,
+
+148
+00:07:40,023 --> 00:07:41,925
+na qual eles tocaram minha compilação
+
+149
+00:07:41,925 --> 00:07:46,330
+de Johnny Cash de IA
+cantando a música “Barbie Girl”,
+
+150
+00:07:46,330 --> 00:07:49,299
+à qual o deputado Matt Gaetz respondeu:
+
+151
+00:07:49,666 --> 00:07:52,803
+“Os robôs não devem estar sujeitos
+à liberdade de expressão.”
+
+152
+00:07:54,238 --> 00:07:56,306
+Agora, só para constar, não sou um robô,
+
+153
+00:07:56,907 --> 00:08:00,644
+mas acho que isso exemplifica um pouco
+da confusão em torno desse assunto,
+
+154
+00:08:00,644 --> 00:08:03,447
+o que faz com que músicos como eu
+
+155
+00:08:03,447 --> 00:08:07,117
+criem nossas próprias regras
+de como usar a IA,
+
+156
+00:08:07,117 --> 00:08:08,719
+o que é certo e o que é errado.
+
+157
+00:08:09,253 --> 00:08:11,488
+Para mim, se resume a três coisas.
+
+158
+00:08:11,488 --> 00:08:13,357
+A primeira é: é enganoso?
+
+159
+00:08:13,357 --> 00:08:15,592
+Alguém poderia acreditar que é mesmo real?
+
+160
+00:08:17,194 --> 00:08:20,631
+Em seguida, há uma intenção
+artística por trás disso?
+
+161
+00:08:20,631 --> 00:08:24,568
+Se você for uma dessas pessoas
+que produz músicas de IA em massa,
+
+162
+00:08:24,568 --> 00:08:27,170
+centenas de músicas,
+e as envia para o Spotify,
+
+163
+00:08:27,571 --> 00:08:30,173
+sua intenção não deve ser artística.
+
+164
+00:08:30,774 --> 00:08:33,977
+Finalmente, como isso afeta os músicos?
+
+165
+00:08:34,745 --> 00:08:38,749
+Muitas vezes, as “vítimas”
+das músicas que eu crio
+
+166
+00:08:38,749 --> 00:08:42,085
+acabam compartilhando
+essas mesmas músicas nas mídias sociais.
+
+167
+00:08:42,085 --> 00:08:45,188
+Por exemplo, eis um trecho do Snoop Dogg
+
+168
+00:08:45,188 --> 00:08:46,990
+reagindo a uma compilação que eu fiz
+
+169
+00:08:46,990 --> 00:08:50,527
+chamada “As necesidades básicas
+são gim e suco”.
+
+170
+00:08:51,595 --> 00:08:54,565
+♪ Posso chutar uma coisinha para elas ♪
+
+171
+00:08:54,565 --> 00:08:57,334
+♪ E fazer algumas pontas
+enquanto eu passo? ♪
+
+172
+00:08:57,334 --> 00:09:00,504
+♪ Duas da manhã, a festa continua animada,
+mamãe não está em casa ♪
+
+173
+00:09:00,504 --> 00:09:03,040
+♪ Tenho vadias se divertindo
+na sala de estar ♪
+
+174
+00:09:03,040 --> 00:09:06,009
+♪ E elas não vão embora
+até as seis da manhã ♪
+
+175
+00:09:06,009 --> 00:09:07,077
+♪ O que quer fazer? ♪
+
+176
+00:09:07,077 --> 00:09:10,814
+♪ Tenho um bolso cheio de camisinhas,
+e meus amigos também ♪
+
+177
+00:09:11,081 --> 00:09:16,053
+(Risos e aplausos)
+
+178
+00:09:17,821 --> 00:09:22,292
+Quando vejo pessoas como Snoop,
+Ed Sheeran, Nicki Minaj
+
+179
+00:09:22,292 --> 00:09:24,461
+e outros compartilhando essas coisas,
+
+180
+00:09:24,461 --> 00:09:28,131
+espero que seja uma indicação
+de que, do meu jeito estranho,
+
+181
+00:09:28,131 --> 00:09:29,866
+estou usando essas tecnologias
+
+182
+00:09:29,866 --> 00:09:32,569
+para contribuir
+com algo novo para o mundo.
+
+183
+00:09:32,869 --> 00:09:35,105
+Acho que, no final das contas,
+
+184
+00:09:35,105 --> 00:09:40,177
+mesmo com todas as muitas desvantagens
+da IA interferindo em nossa música,
+
+185
+00:09:40,177 --> 00:09:43,013
+muitos artistas estão descobrindo
+a mesma coisa que eu:
+
+186
+00:09:43,013 --> 00:09:47,551
+há maneiras de usar a IA que podem
+realmente aumentar a criatividade.
+
+187
+00:09:48,051 --> 00:09:53,790
+Acho que poderíamos ver
+músicas, sons e estilos novos
+
+188
+00:09:53,790 --> 00:09:56,159
+que talvez nem possamos imaginar hoje,
+
+189
+00:09:56,159 --> 00:09:59,463
+assim como teria sido difícil
+para alguém como John Philip Sousa
+
+190
+00:09:59,463 --> 00:10:03,667
+ter imaginado esta monstruosidade final
+que vou tocar para vocês.
+
+191
+00:10:04,434 --> 00:10:08,405
+É uma música que, quando minha esposa
+ouviu pela primeira vez, ela disse:
+
+192
+00:10:08,805 --> 00:10:11,041
+“Essa é a coisa mais estúpida que já vi.”
+
+193
+00:10:11,041 --> 00:10:12,476
+(Risos)
+
+194
+00:10:12,843 --> 00:10:15,278
+Essa vai para todos os fãs do Nickelback.
+
+195
+00:10:15,278 --> 00:10:16,380
+(Risos)
+
+196
+00:10:16,380 --> 00:10:18,048
+(Música)
+
+197
+00:10:18,048 --> 00:10:20,050
+♪ Veja esta fotografia ♪
+
+198
+00:10:20,817 --> 00:10:23,120
+♪ É uma foto de uma fotografia ♪
+
+199
+00:10:23,120 --> 00:10:24,121
+(Risos)
+
+200
+00:10:24,121 --> 00:10:26,523
+♪ Há outra maldita fotografia ♪
+
+201
+00:10:27,290 --> 00:10:29,926
+♪ Porque fotografei a fotografia ♪
+
+202
+00:10:31,128 --> 00:10:33,363
+♪ Tantas fotografias ♪
+
+203
+00:10:33,997 --> 00:10:36,366
+♪ Fazem querer eu tirar uma fotografia ♪
+
+204
+00:10:37,300 --> 00:10:39,970
+♪ Eu deveria pendurar essa fotografia ♪
+
+205
+00:10:40,337 --> 00:10:43,106
+♪ Ao lado da minha foto
+de uma fotografia ♪
+
+206
+00:10:43,607 --> 00:10:45,542
+[Nickelback “O Fonógrafo”]
+
+207
+00:10:45,542 --> 00:10:47,844
+♪ Veja esse fonógrafo! ♪
+
+208
+00:10:48,211 --> 00:10:50,681
+♪ Toda vez que vejo, ele me faz rir! ♪
+
+209
+00:10:51,181 --> 00:10:53,750
+♪ Ouça os sons da dança ragtime! ♪
+
+210
+00:10:54,084 --> 00:10:56,687
+♪ Todas as garotas
+querem transar comigo! ♪
+
+211
+00:10:59,056 --> 00:11:01,024
+♪ Mas voltando a aquela fotografia ♪
+
+212
+00:11:01,024 --> 00:11:02,092
+(Risos)
+
+213
+00:11:02,092 --> 00:11:04,761
+♪ Ela me lembra da fotografia ♪
+
+214
+00:11:05,195 --> 00:11:07,731
+♪ Antes da foto daquela fotografia ♪
+
+215
+00:11:08,465 --> 00:11:11,201
+♪ Quando era apenas
+uma fotografia normal ♪
+
+216
+00:11:12,436 --> 00:11:13,570
+(Fim da música)
+
+217
+00:11:14,871 --> 00:11:16,206
+Muito obrigado a todos.
+
+218
+00:11:16,206 --> 00:11:19,009
+(Vivas e aplausos)

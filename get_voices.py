@@ -1,7 +1,8 @@
 import subprocess
+import asyncio
 import json
-import re
 from collections import defaultdict
+from edge_tts import VoicesManager
 
 # Dicionário para mapear códigos de idioma para nomes completos
 language_mapping = {
@@ -83,33 +84,56 @@ language_mapping = {
     "zu": "Zulu"
 }
 
+async def generate_voices_json():
+    """
+    Usa a biblioteca edge-tts para obter a lista de vozes diretamente,
+    agrupa por nome de idioma mapeado e salva em voices.json.
+    """
+    print("Gerando lista de vozes a partir da API... Isso pode levar um momento.")
+    
+    try:
+        voices_manager = await VoicesManager.create()
+        voices_by_lang_name = defaultdict(list)
+        
+        for voice in voices_manager.voices:
+            # Pega o código de localidade, ex: "pt-BR"
+            locale_code = voice["Locale"]
+            # Pega apenas a primeira parte (o código do idioma), ex: "pt"
+            lang_code = locale_code.split('-')[0]
+            
+            # Usa o seu mapeamento para obter o nome completo, ex: "Portuguese"
+            # Se o código não estiver no mapa, usa o próprio código como fallback
+            language_name = language_mapping.get(lang_code, lang_code)
+            
+            voice_info = {
+                "name": voice["ShortName"], 
+                "gender": voice["Gender"]
+            }
+            
+            voices_by_lang_name[language_name].append(voice_info)
+
+        # Ordena o dicionário final pelo nome do idioma para consistência
+        sorted_voices = dict(sorted(voices_by_lang_name.items()))
+
+        with open("voices.json", "w", encoding="utf-8") as f:
+            json.dump(sorted_voices, f, ensure_ascii=False, indent=4)
+            
+        print(f"Lista de vozes salva com sucesso em 'voices.json'.")
+        print(f"Total de {len(voices_manager.voices)} vozes em {len(sorted_voices)} idiomas.")
+
+    except Exception as e:
+        print(f"Ocorreu um erro ao tentar gerar o arquivo de vozes: {e}")
+        print("Verifique sua conexão com a internet e se a biblioteca 'edge-tts' está instalada corretamente.")
+
+# A função 'get_voices' agora é um simples wrapper para a função assíncrona
 def get_voices():
-    # Executa o comando edge-tts --list-voices
-    result = subprocess.run(['edge-tts', '--list-voices'], capture_output=True, text=True)
-
-    if result.returncode != 0:
-        print("Erro ao executar o comando edge-tts.")
-        return
-
-    # Processa a saída
-    voices = result.stdout.strip().split("\n\n")
-    voices_data = defaultdict(list)
-
-    for voice in voices:
-        # Usa regex para capturar o nome e o gênero
-        match = re.findall(r'Name:\s*(.*?)\s*Gender:\s*(\w+)', voice)
-        if match:
-            name, gender = match[0]
-            language_code = name.split('-')[0]  # Pega o código do idioma
-            language_name = language_mapping.get(language_code, language_code)  # Obtém o nome completo do idioma
-            voices_data[language_name].append({
-                'name': name,
-                'gender': gender
-            })
-
-    # Salva em um arquivo JSON
-    with open('voices.json', 'w', encoding='utf-8') as json_file:
-        json.dump(voices_data, json_file, ensure_ascii=False, indent=4)
+    """Wrapper síncrono para executar a geração do JSON de vozes."""
+    try:
+        asyncio.run(generate_voices_json())
+    except RuntimeError:
+        # Lida com o caso de já haver um loop de eventos rodando (comum em notebooks)
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(generate_voices_json())
 
 if __name__ == "__main__":
     get_voices()

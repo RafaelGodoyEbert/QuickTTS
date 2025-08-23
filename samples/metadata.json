@@ -1,0 +1,12 @@
+{
+    "TiktokTTS - Portuguese - Is AI Ruining Music  Dustin Ballard  TED": {
+        "provider": "Edge-TTS",
+        "language": "Portuguese",
+        "voice": "pt-BR-AntonioNeural"
+    },
+    "edgeTTS - Portuguese - Is AI Ruining Music  Dustin Ballard  TED": {
+        "provider": "TikTok",
+        "category": "Português (Brasil)",
+        "voice": "BR_MALE"
+    }
+}
