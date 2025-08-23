@@ -73,32 +73,51 @@ def get_tiktok_voice_options(language):
     return TIKTOK_VOICES_CATEGORIZED.get(language, [])
 
 # --- Função Controladora de Texto/Arquivo ---
-def controlador_generate_audio_tiktok(voice_str, text, text_file, cut_silence):
-    if not TIKTOK_TTS_AVAILABLE:
-        raise gr.Error("A biblioteca TikTok TTS não está instalada ou configurada corretamente.")
-    if not text and text_file is None:
-        raise gr.Error("Por favor, forneça um texto ou um arquivo .txt para gerar o áudio.")
+async def process_srt_file_tiktok(srt_file_path, voice_str, output_dir_str, srt_temp_deleta, progress=None):
+    subs = pysrt.open(srt_file_path)
+    output_dir = Path(output_dir_str)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    max_retries = 3 # Número de tentativas para cada legenda
 
-    output_dir = "output"; os.makedirs(output_dir, exist_ok=True)
-    output_file = os.path.join(output_dir, "tiktok_audio.mp3")
-    input_text = text if text else Path(text_file.name).read_text(encoding='utf-8')
+    with tqdm(total=len(subs), desc="Gerando e ajustando áudios com TikTok", unit="segmento") as pbar:
+        for sub in subs:
+            output_file = output_dir / f"{sub.index:02d}.mp3"
+            temp_file = output_dir / f"{sub.index:02d}_temp.mp3"
+            target_duration_ms = timetoms(sub.end) - timetoms(sub.start)
+
+            if not output_file.exists() or output_file.stat().st_size == 0:
+                success = False
+                for attempt in range(max_retries):
+                    try:
+                        await asyncio.to_thread(tts, sub.text, Voice[voice_str], str(temp_file))
+                        
+                        if temp_file.exists() and temp_file.stat().st_size > 0:
+                            await adjust_audio_speed(str(temp_file), str(output_file), target_duration_ms)
+                            os.remove(temp_file)
+                            success = True
+                            break
+                        else:
+                            print(f"Aviso: Tentativa {attempt + 1} para o índice {sub.index} (TikTok) falhou. Retentando...")
+
+                    except Exception as e:
+                        print(f"Aviso: Tentativa {attempt + 1} para o índice {sub.index} (TikTok) falhou com erro: {e}. Retentando...")
+                    
+                    await asyncio.sleep(1)
+
+                if not success:
+                    print(f"ERRO: Todas as {max_retries} tentativas (TikTok) falharam para o índice {sub.index}. Gerando silêncio.")
+                    silent_segment = AudioSegment.silent(duration=target_duration_ms)
+                    silent_segment.export(str(output_file), format="mp3")
+
+            pbar.update(1)
+
+    final_audio = await merge_audio_files(output_dir, srt_file_path)
     
-    try:
-        print(f"Gerando áudio com a voz TikTok: {voice_str}...")
-        tts(input_text, Voice[voice_str], output_file)
-        print("Áudio TikTok gerado com sucesso!")
-        if cut_silence:
-            print("Removendo silêncio do áudio TikTok..."); remove_silence(output_file, output_file); print("Silêncio removido.")
-        return output_file
+    if srt_temp_deleta:
+        shutil.rmtree(output_dir, ignore_errors=True)
+        print(f"Pasta temporária {output_dir} apagada.")
     
-    except requests.exceptions.RequestException as e:
-        print(f"!!! TIKTOK TTS NETWORK ERROR DETECTED: {e}")
-        raise gr.Error(TIKTOK_CONNECTION_ERROR_MSG)
-    except KeyError:
-        raise gr.Error(f"A voz '{voice_str}' não foi encontrada.")
-    except Exception as e:
-        print(f"!!! TIKTOK TTS UNEXPECTED ERROR: {type(e).__name__} - {e}")
-        raise gr.Error(f"Ocorreu um erro inesperado no TikTok TTS, se tiver usando GRADIO, mude pra Google Colab: {e}")
+    return final_audio
 
 # --- NOVA LÓGICA DE PROCESSAMENTO DE SRT PARA TIKTOK ---
 

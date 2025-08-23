@@ -90,28 +90,52 @@ def controlador_generate_audio_from_file(file, voice_model_input, speed, pitch, 
 
 # --- Lógica de Processamento de SRT (Usa Edge-TTS) ---
 async def process_srt_file(srt_file_path, voice, output_dir_str, pitch, volume, srt_temp_deleta, progress=None):
-    from edge_tts import Communicate as EdgeTTS # Importação local para manter dependências contidas
+    from edge_tts import Communicate as EdgeTTS
+    from pydub import AudioSegment # Adicionado para gerar silêncio
+
     subs = pysrt.open(srt_file_path)
     output_dir = Path(output_dir_str)
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    total_indices = len(subs)
     pitch_str = f"+{pitch}Hz" if pitch >= 0 else f"{pitch}Hz"
     volume_str = f"+{volume}%" if volume >= 0 else f"{volume}%"
+    max_retries = 3 # Número de tentativas para cada legenda
 
-    with tqdm(total=total_indices, desc="Gerando e ajustando áudios com EdgeTTS", unit="segmento") as pbar:
+    with tqdm(total=len(subs), desc="Gerando e ajustando áudios com EdgeTTS", unit="segmento") as pbar:
         for sub in subs:
-            temp_file = output_dir / f"{sub.index:02d}_temp.mp3"
             output_file = output_dir / f"{sub.index:02d}.mp3"
+            temp_file = output_dir / f"{sub.index:02d}_temp.mp3"
             target_duration_ms = timetoms(sub.end) - timetoms(sub.start)
-            
+
+            # Só processa se o arquivo final não existir
             if not output_file.exists() or output_file.stat().st_size == 0:
-                tts_edge = EdgeTTS(text=sub.text, voice=voice, pitch=pitch_str, volume=volume_str)
-                await tts_edge.save(str(temp_file))
+                success = False
+                # Loop de retentativa
+                for attempt in range(max_retries):
+                    try:
+                        tts_edge = EdgeTTS(text=sub.text, voice=voice, pitch=pitch_str, volume=volume_str)
+                        await tts_edge.save(str(temp_file))
+                        
+                        # Verifica se o arquivo foi realmente criado e não está vazio
+                        if temp_file.exists() and temp_file.stat().st_size > 0:
+                            await adjust_audio_speed(str(temp_file), str(output_file), target_duration_ms)
+                            os.remove(temp_file)
+                            success = True
+                            break # Sai do loop de retentativa se tiver sucesso
+                        else:
+                            print(f"Aviso: Tentativa {attempt + 1} para o índice {sub.index} falhou (arquivo não criado). Retentando...")
+
+                    except Exception as e:
+                        print(f"Aviso: Tentativa {attempt + 1} para o índice {sub.index} falhou com erro: {e}. Retentando...")
+                    
+                    await asyncio.sleep(1) # Espera 1 segundo antes da próxima tentativa
                 
-                if temp_file.exists():
-                    await adjust_audio_speed(str(temp_file), str(output_file), target_duration_ms)
-                    os.remove(temp_file)
+                # Se todas as tentativas falharem, gera silêncio
+                if not success:
+                    print(f"ERRO: Todas as {max_retries} tentativas falharam para o índice {sub.index}. Gerando silêncio.")
+                    silent_segment = AudioSegment.silent(duration=target_duration_ms)
+                    silent_segment.export(str(output_file), format="mp3")
+
             pbar.update(1)
 
     final_audio = await merge_audio_files(output_dir, srt_file_path)
