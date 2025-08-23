@@ -38,7 +38,7 @@ Acesse a versão pública e sempre disponível diretamente no seu navegador. Ide
 
 ### 2. Google Colab (Recomendado para TikTok TTS)
 Para usar todas as funcionalidades, incluindo o TikTok TTS, o Google Colab é a melhor opção online.
-- **[Abrir no Google Colab](https://colab.research.google.com/drive/1hpTDhlEEVZLtJ722d9U11DwNEadtxlu7?usp=sharing)**
+- **[Abrir no Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1XtHdHqnMxjuuXPZkhpCLJIweV09n7YJF?usp=sharing)**
   - Basta clicar no link, e depois em "Executar tudo" (ou executar as células uma por uma). Um link público será gerado para você acessar a interface.
 
 ### 3. Execução Local (Controle Total)
