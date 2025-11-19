@@ -9,10 +9,10 @@ import gradio as gr
 
 # --- Gerenciamento de Caminho e Diretório ---
 original_cwd = os.getcwd()
-amphion_path = os.path.abspath("Amphion")
+amphion_path = "../Amphion"
 
 if amphion_path not in sys.path:
-    sys.path.append(amphion_path)
+    sys.path.insert(0, amphion_path)
 
 os.chdir(amphion_path)
 print(f"Diretório de trabalho alterado para: {os.getcwd()}")
