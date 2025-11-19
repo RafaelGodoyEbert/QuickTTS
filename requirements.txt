@@ -1,2 +1,6 @@
 edge-tts
-gradio
+pydub
+pysrt
+tqdm
+requests
+playsound==1.2.2
