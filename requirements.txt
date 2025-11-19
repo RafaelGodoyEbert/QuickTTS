@@ -32,6 +32,3 @@ ruamel.yaml
 openai-whisper
 ipython
 pyworld
-kokoro>=0.3.1
-soundfile
-misaki[zh,ja]
