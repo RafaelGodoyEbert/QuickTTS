@@ -79,6 +79,14 @@ def patch_langsegment_init():
     except Exception as e:
         print(f"Ocorreu um erro inesperado ao aplicar o patch no LangSegment: {e}")
 
+# Clone Amphion repository
+if not os.path.exists("Amphion"):
+    subprocess.run(["git", "clone", "https://github.com/open-mmlab/Amphion.git"])
+    os.chdir("Amphion")
+else:
+    if not os.getcwd().endswith("Amphion"):
+        os.chdir("Amphion")
+        
 def preload_all_vevo_resources():
     """Baixa todos os modelos e configurações necessários para o Vevo."""
     target_dir = os.path.join("Amphion", "ckpts", "Vevo")
@@ -116,4 +124,5 @@ def setup_vevo():
     print("=== CONFIGURAÇÃO DO VEVO CONCLUÍDA ===")
 
 if __name__ == "__main__":
+
     setup_vevo()
