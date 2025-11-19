@@ -29,7 +29,9 @@ pykakasi
 json5
 black>=24.1.1
 ruamel.yaml
-tqdm
 openai-whisper
 ipython
 pyworld
+kokoro>=0.3.1
+soundfile
+misaki[zh,ja]
