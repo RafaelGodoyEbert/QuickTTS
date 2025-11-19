@@ -1,0 +1,4 @@
+edge-tts
+pysrt
+pydub
+tqdm

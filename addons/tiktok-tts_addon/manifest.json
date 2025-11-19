@@ -1,0 +1,8 @@
+{
+    "name": "TikTok-TTS",
+    "version": "1.0",
+    "author": "Equipe QuickTTS",
+    "description": "Provedor de voz que utiliza as vozes populares do serviço Text-to-Speech do TikTok.",
+    "entry_point": "addon",
+    "requirements": "requirements.txt"
+}

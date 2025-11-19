@@ -1,0 +1,8 @@
+{
+    "name": "Kokoro-TTS",
+    "version": "1.0",
+    "author": "Equipe QuickTTS (Adaptado por IA)",
+    "description": "Provedor de voz que utiliza o modelo Kokoro TTS.",
+    "entry_point": "addon",
+    "requirements": "requirements.txt"
+}

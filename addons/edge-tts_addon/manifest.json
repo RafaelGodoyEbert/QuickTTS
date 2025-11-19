@@ -1,0 +1,8 @@
+{
+    "name": "Edge-TTS",
+    "version": "1.0",
+    "author": "Equipe QuickTTS",
+    "description": "Provedor de voz que utiliza a API de Text-to-Speech do Microsoft Edge.",
+    "entry_point": "addon",
+    "requirements": "requirements.txt"
+}

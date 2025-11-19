@@ -1,0 +1,6 @@
+kokoro>=0.3.1
+soundfile
+misaki[zh,ja]
+pysrt
+pydub
+tqdm
