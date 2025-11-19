@@ -12,7 +12,7 @@ import shutil
 import tempfile
 import traceback
 
-log = False
+log = True
 
 if log:
     # ### INÍCIO DO CÓDIGO DE DEPURAÇÃO DE AMBIENTE ###
@@ -26,6 +26,12 @@ if log:
     print("="*60 + "\n")
     # ### FIM DO CÓDIGO DE DEPURAÇÃO ###
 
+# Adiciona a pasta addons ao path do Python ANTES de tentar carregar
+# Isso faz com que o Python procure módulos dentro da pasta 'addons'
+addons_dir = os.path.join(os.path.dirname(__file__), 'addons')
+if addons_dir not in sys.path:
+    sys.path.insert(0, addons_dir)
+    
 # Tenta importar o GitPython
 try:
     import git
@@ -43,14 +49,26 @@ from header import badges, description
 
 # --- Executa a configuração do Vevo ao iniciar o app ---
 try:
+    print(f"Diretório antes do Vevo: {os.getcwd()}")
+    
     install_vevo.setup_vevo()
     VEVO_AVAILABLE = True
+    
+    # CORREÇÃO FORÇADA:
+    # Não use variáveis antigas. Force a volta para a raiz absoluta do sistema.
+    os.chdir("../") 
+    print(f"Diretório de trabalho FORÇADO para: {os.getcwd()}")
+
 except Exception as e:
     print(f"AVISO: Falha na configuração do Vevo. A clonagem de voz pode não funcionar. Erro: {e}")
     VEVO_AVAILABLE = False
+    # Garante a volta mesmo em caso de erro
+    os.chdir("../")
+    print("Diretório restaurado para /app após erro.")
 
 # --- Configurações Globais ---
-ADDONS_DIR = "addons"
+PROJECT_ROOT = Path(__file__).parent.resolve() # Garanta que esta linha venha primeiro
+ADDONS_DIR = PROJECT_ROOT / "addons" # <-- ESTA É A CORREÇÃO
 loaded_addons = {}
 PROJECT_ROOT = Path(__file__).parent.resolve()
 
@@ -59,16 +77,31 @@ def load_addons():
     print("--- Iniciando carregamento de addons ---")
     if not os.path.exists(ADDONS_DIR): os.makedirs(ADDONS_DIR)
     
-    for addon_name in sorted(os.listdir(ADDONS_DIR)):
+    addon_folders = sorted(os.listdir(ADDONS_DIR))
+    print(f"Pastas encontradas em '{ADDONS_DIR}': {addon_folders}") # <-- NOVO PRINT
+
+    for addon_name in addon_folders:
+        print(f"\n[Verificando: {addon_name}]") # <-- NOVO PRINT
         addon_path = os.path.join(ADDONS_DIR, addon_name)
         if os.path.isdir(addon_path):
             manifest_path = os.path.join(addon_path, "manifest.json")
-            if not os.path.exists(manifest_path): continue
+            if not os.path.exists(manifest_path):
+                print(f"  -> AVISO: 'manifest.json' não encontrado. Pulando addon.") # <-- NOVO PRINT
+                continue
+            
+            print(f"  -> 'manifest.json' encontrado.") # <-- NOVO PRINT
             try:
                 with open(manifest_path, 'r', encoding='utf-8') as f: manifest = json.load(f)
+                
                 entry_point_name = manifest.get('entry_point', 'addon')
+                print(f"  -> Ponto de entrada definido no manifest: '{entry_point_name}.py'") # <-- NOVO PRINT
+                
                 entry_point_path = os.path.join(addon_path, f"{entry_point_name}.py")
-                if not os.path.exists(entry_point_path): continue
+                if not os.path.exists(entry_point_path):
+                    print(f"  -> ERRO: Arquivo de entrada '{entry_point_name}.py' NÃO encontrado. Pulando addon.") # <-- NOVO PRINT
+                    continue
+                
+                print(f"  -> Arquivo de entrada encontrado. Tentando carregar...") # <-- NOVO PRINT
                 
                 spec = importlib.util.spec_from_file_location(addon_name, entry_point_path)
                 addon_module = importlib.util.module_from_spec(spec)
@@ -81,11 +114,14 @@ def load_addons():
                 
                 addon_display_name = addon_module.get_name()
                 loaded_addons[addon_display_name] = addon_module
-                print(f"- Addon '{addon_display_name}' carregado com sucesso.")
+                print(f"  -> SUCESSO: Addon '{addon_display_name}' carregado.") # <-- NOVO PRINT
             except Exception as e:
                 print(f"ERRO CRÍTICO: Falha ao carregar o addon '{addon_name}': {e}")
                 traceback.print_exc()
-    print(f"--- Carregamento finalizado. Total de addons carregados: {len(loaded_addons)} ---")
+        else:
+            print(f"  -> AVISO: '{addon_name}' não é uma pasta. Pulando.") # <-- NOVO PRINT
+            
+    print(f"\n--- Carregamento finalizado. Total de addons carregados: {len(loaded_addons)} ---")
 
 # --- FUNÇÕES DE INSTALAÇÃO (Sem alterações) ---
 def _install_dependencies(addon_root_path, manifest, progress):
@@ -210,8 +246,7 @@ with gr.Blocks(theme=gr.themes.Default(primary_hue="green", secondary_hue="blue"
                 all_inputs = [i for n in addon_choices for i in addon_inputs[n]]
                 gerar_button.click(fn=dispatcher, inputs=[provider_choice] + all_inputs, outputs=audio_output)
             
-            gr.Markdown("<hr>")
-            gr.Markdown("### Etapa 2: Clonar a Voz (Opcional)")
+            gr.Markdown("<hr>### Etapa 2: Clonar a Voz (Opcional)")
             with gr.Accordion("Clone de voz", open=False):
                 cloning_model_choice = gr.Radio(["Vevo-Timbre", "SeedVC"], value="Vevo-Timbre", label="Modelo")
                 reference_audio_input = gr.Audio(label="Áudio de Referência", type="filepath")
